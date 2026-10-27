@@ -2,6 +2,7 @@
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import BookingCard from "@/app/components/booking/BookingCard";
 import {
     ArrowLeft,
     ArrowRight,
@@ -140,33 +141,7 @@ const DetailsPage = () => {
                 </div>
 
                 {/* Right: booking card */}
-                <aside className="h-fit border border-neutral-200 bg-white p-5 shadow-sm">
-                    <p className="text-xs text-neutral-500">Starting from</p>
-                    <p className="mt-1 text-3xl font-semibold text-[#1597b8]">${item.price}</p>
-                    <p className="mt-1 text-xs text-neutral-500">per person</p>
-
-                    <input
-                        type="date"
-                        className="mt-5 h-[40px] w-full bg-neutral-50 px-3 text-[13px] text-neutral-800 outline-none"
-                    />
-
-                    <button
-                        type="button"
-                        className="mt-6 flex h-[42px] w-full items-center justify-center gap-2 bg-[#1597b8] text-[13px] text-white transition-colors hover:bg-[#118199]"
-                    >
-                        Book Now
-                        <ArrowRight size={14} />
-                    </button>
-
-                    <ul className="mt-4 space-y-2">
-                        {item.features?.map((text) => (
-                            <li key={text} className="flex items-center gap-2 text-[11px] text-neutral-600">
-                                <Check size={13} className="shrink-0 text-green-600" />
-                                {text}
-                            </li>
-                        ))}
-                    </ul>
-                </aside>
+                <BookingCard destination={item} />
             </div>
         </main>
     );

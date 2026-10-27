@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { User } from "lucide-react";
+import AuthButtons from "./AuthButtons";
+
 
 type NavLink = {
     label: string;
@@ -51,28 +53,9 @@ export default function Navbar() {
                     Wanderlast
                 </Link>
 
-                {/* Right links */}
-                <ul className="col-start-3 flex items-center justify-end gap-5">
-                    <li>
-                        <Link
-                            href="/profile"
-                            className="flex items-center gap-1.5 transition-colors hover:text-[#1597b8]"
-                        >
-                            <User size={13} strokeWidth={1.8} />
-                            Profile
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href="/login" className="transition-colors hover:text-[#1597b8]">
-                            Login
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href="/signup" className="transition-colors hover:text-[#1597b8]">
-                            Sign Up
-                        </Link>
-                    </li>
-                </ul>
+                <AuthButtons />
+
+
             </nav>
         </header>
     );
