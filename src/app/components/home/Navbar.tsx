@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { User } from "lucide-react";
-import AuthButtons from "./AuthButtons";
+import AuthButtons from "../AuthButtons";
 
 
 type NavLink = {
@@ -15,6 +15,7 @@ const leftLinks: NavLink[] = [
     { label: "Home", href: "/" },
     { label: "Destinations", href: "/destination" },
     { label: "My Bookings", href: "/my-bookings" },
+    { label: "Add Destination", href: "/add-destination" },
     { label: "Admin", href: "/admin" },
 ];
 
@@ -22,10 +23,10 @@ export default function Navbar() {
     const pathname = usePathname();
 
     return (
-        <header className="absolute left-0 right-0 top-0 z-30 px-2 pt-2.5">
+        <header className=" sticky left-0 right-0 top-0 z-30 px-2 ">
             <nav className="mx-auto grid h-[34px] w-full max-w-[1400px] grid-cols-[1fr_auto_1fr] items-center bg-white px-4 text-[13px] text-neutral-900 md:px-6">
                 {/* Left links */}
-                <ul className="hidden items-center gap-6 md:flex">
+                <ul className="hidden items-center gap-6 md:flex py-3">
                     {leftLinks.map(({ label, href }) => {
                         const active = pathname === href;
                         return (

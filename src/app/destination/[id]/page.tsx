@@ -1,11 +1,10 @@
-"use client"
+"use client";
+
+import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import Link from "next/link";
-import BookingCard from "@/app/components/booking/BookingCard";
 import {
     ArrowLeft,
-    ArrowRight,
     Calendar,
     Check,
     MapPin,
@@ -13,6 +12,10 @@ import {
     Star,
     Trash2,
 } from "lucide-react";
+import BookingCard from "@/app/components/booking/BookingCard";
+
+
+
 type Destination = {
     _id: string;
     title: string;
@@ -28,39 +31,53 @@ type Destination = {
 };
 
 const DetailsPage = () => {
-
     const { id } = useParams<{ id: string }>();
 
     const [item, setItem] = useState<Destination | null>(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        if (!id) return;
+
         const fetchDetails = async () => {
             try {
-                const res = await fetch(`http://localhost:5000/destinations/${id}`)
-                const data = await res.json();
-                setItem(data);
-            }
-            catch (err) {
-                console.log("error occurs:", err)
+                const res = await fetch(
+                    `http://localhost:5000/destinations/${id}`
+                );
 
-            }
-            finally {
+                if (!res.ok) {
+                    throw new Error("Failed to fetch destination");
+                }
+
+                const data = await res.json();
+
+                setItem(data);
+            } catch (error) {
+                console.error("Error fetching destination:", error);
+                setItem(null);
+            } finally {
                 setLoading(false);
             }
-
-        }
+        };
 
         fetchDetails();
     }, [id]);
+
     if (loading) {
-        return <p className="px-6 pt-28 text-center text-sm">Loading...</p>;
+        return (
+            <p className="px-6 pt-28 text-center text-sm">
+                Loading...
+            </p>
+        );
     }
 
     if (!item) {
-        return <p className="px-6 pt-28 text-center text-sm">Destination not found</p>;
+        return (
+            <p className="px-6 pt-28 text-center text-sm">
+                Destination not found
+            </p>
+        );
     }
-
 
     return (
         <main className="mx-auto w-full max-w-[1100px] px-6 pb-16 pt-20">
